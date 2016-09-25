@@ -1,0 +1,76 @@
+\chapter{Developed methods}
+
+\section{M1 - Word level subjectivity inference}
+
+This method was inspired by article \cite{kamal2013}. While the article presents a comprehencive system for subjectivity detection, 
+it focues mainlny on word level subjectivity classifiaction. All of it's features and analysys address the probelm of assinging subjective or objective label to individual words. This paper 
+focues on sentence level classifiaction , however the article mentiones a method for sentence level classifiaction. It is stated that, the results of word level subjecticity assingment can
+be run throug rule based classifiaction algorithm to obtain sentence level classifaiction. Basd on this we decided to put this theory in test by divising our own method. 
+To abstract away troublesome word level subjecticity classifiaction we employed a popular sentiment dictionary - SentiWordNet\footnote{ http://sentiwordnet.isti.cnr.it/ }.  
+This dictionary makes an effort in determining how much each word ( or rather synset ) is negative or positive. This two information are represented as percentages, it is also stated in 
+SentiWordNet documentation, that we can obtain information on how much each word is objectiive. The formula below allows this: \( W_op = 1 - (W_np+W_pp)  \) where \( W_op \) designates the 
+percentage of word objectivity, \( W_np \) denotes negativity percentage for word, as found in dictionary and \( W_pp \) denotes positivity percentage also found in dictionary. 
+
+This formula was used by this method to determine wether word is subjective,objective or unclassified. Dictionary lookup was performed with help of openNLP stemmer. Then some features where dvised
+
+\begin{itemize}
+\item \textbf{W} - Representes count of words found in sentence ( number of tokens as returned by tokenizer )
+\item \textbf{N} - Representes count of words which where not found in SentiWordNet dictionary
+\item \textbf{S} - Representes count of words for which \( W_op < 1 \)
+\item \textbf{O} - Representes count of words for which \( W_op = 1 \)
+\item \textbf{SPC} - Binary feature. It is set to 0 when \( S > 0 \) and 1 otherwise
+\item \textbf{SOPC} - Binary feature.It is set to 0 when \( S > O \) and 1 otherwise
+\end{itemize}
+
+In this shape the method offered upto 60\% Accuracys
+
+
+Further in the study we decided that it would be benefitial to upgrade this method, with part of speach statistics. 
+For this purpose openNLP POSTagger was employed to determine for each word what part of speach it constitutes. Then another 11 features where introduced each representing the count of words belonging
+to this part of speach. The features names where taken after POSTag offered by openNLP
+
+
+\section{M2 - Subjectivity by readability}
+
+
+This method assumes that information regrading text readability provide significant clues to text subjectivity. 
+This method statrted of as simple application of proposition from article \cite{remus2011}.  Evaluation of readability metrics requiered an algorithm for syllabe counting. 
+We decided to use a ready to go implementaion \footnote{ The implementaion is available at: 
+\detokenize{http://homes.lmc.gatech.edu/~bmagerko6/classes/LCC6310/exhibit/4/watson_nicholas/EnglishSyllableCounter.java} } 
+with good reported accuracy. Also some statistics about testcases are gathered durring method evaluation. This statistics include:
+\begin{itemize}
+\item \textbf{sl} - Representes number of words ( tokens from tokenizer ) found in testcase
+\item \textbf{wl} - Representes average word length in characters 
+\item \textbf{nosw} - Representes number of words with exactly one syllabe
+\item \textbf{npsw} - Representes number of words with more then one syllable
+\item \textbf{ntop} - Representes number of word from testcase which are not amongs 1000 most frequnet. details \cite{ 2.1.7 }{remus2011}
+\item \textbf{c} - Representes number of characters in the testcase, without spaces
+\item \textbf{cw} - Representes number of complex words, ie. number of words with more than 4 syllabes
+\item \textbf{tsc} - Representes total number of syllabes in all words of testcase
+\end{itemize}
+
+Then based on this information folowing features are calculated. We present only forumals for this features, and in bracket their names as used in source article. The article  \cite{ subsection 2.1 }{remus2011} offers more precise desciption of this features.
+
+
+\section{M3 - Bag of words}
+
+This method explotis somewhat "bruteforce" approach to subjecticity discrimination. It's base idea is to assemble a set words against wchich classified senetences will be examined
+- this is the title bag of words. After the construction of the bag method evaluation is pretty straightforward. This method uses as many features as there are words in the bag. Each
+feature is binary. It's value determines wether specific word is found in the evaluated sentence or not. It is worth mentioning that no stemming is performed here. This method poses a significant computational challange. The wides set of unique
+words found was around 22000. If we combine this with 10000 testcases this creates a test that takes way to much time to compute. Therefore we where forced to limit the wordset size. 
+
+This is where the choice of the bag becomes a problem.  There are many diffrent ways to do it. One key obseration is that if we choos to much "exotic" words we run into risk of having to 
+many identical test cases ( ie. not containing this word ). This is why we decided to test a pretty simplistic approach. We calculated for each word in dataset how many times it appears in
+test cases. Than we choosen  only those words which appeard the most. We performed test determinig what ammount of words schould be choosesn. Test performed on a sample of data from all data
+sets and with bag size ranging from 100 to 2000.  The conclusion was that the best result where obviously obtained  with the most words, however accuracy drops only by 0.1 if we use only 500 
+words. Finaly this was the setup that was used. 
+
+\section{M4 - Subjectivity by Ngram statistics}
+
+This method is an application of proposition found in article \cite{kraaij2008}. The article discusses diffrent type of ngrams. Because of the result presnted, we used
+the super ngram approach. We used uni,bi and trigrams in our tests.  In essence the method relies on frequnecy of ngrams in testcase. This raises major problems with model classifier 
+evalutaion, because there are around 2500 features. To mitigate this situation, we needed to limit feature set. Backwards feature selecton could'nt be used in this case because it could casue overfitting. 
+We did remedy this situation similarly as with method M3, by sorting all available ngrams by frequnecy from dataset, and then leaving only n features with highest frequnecy.  Using our sample
+dataset we performed some test regarding the ammount of ngarms to use for best results.  Test where performed with limit to 1500, 1000, 500 and 50 most frequent ngrams.  
+Obviously the results where best for the 1500 case. But the second best results where obtainted by 50 ngram test case and it results where worse only by 0.001. We concluded that there is 
+no need to use so much features and we used only 50 ngrams

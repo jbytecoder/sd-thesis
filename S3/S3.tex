@@ -1,0 +1,97 @@
+\chapter{Background}
+
+This chapter is awesowe. \cite{remus2015}
+
+\section{ Dataset preparation }
+
+Datasets for subjectivity discrimination are quite scarse. This is due to large ammounts of human effort requiered to create such a dataset. 
+Beceause there aren't any automatic methods of text annotation with accuracy as high on staisfactionary level, the only way do obtain such annotation
+is through manual work. Each sentence has to be read and assesed by human. This is why, when it is done, researches try to annotate as many information
+as they can think of. 
+This results in a dataset filled with variety of information which have to be filtered out, for the purpouse of subjectivity discrimination. Moreover dffrent
+standarts and tools for such annotations exists, which leads to fromat inconsitencies.
+Keeping that in mind before any of the, before any of the datasets could be used, They had to be preprocessed acordingly to their annotation scheme. Also
+a common format had to be developed.
+
+For the purpouse of this thesis, a simple format was divised. Each type of sentence recived an numerical class identifier, 
+which carried information about subjectivity. The class mapping that was used throughout this document was as folows:
+
+\begin{itemize}
+\item \textbf{1} - Denotes an objective sentence
+\item \textbf{0} - Denotes an subjective sentence
+\end{itemize} 
+
+Then dataset was stored as csv file, separated by colon. Detailed preprocessing information can be found in descriptions of respective datasets. 
+
+Some additional tools where requiered to properly process data before they could be classified. The openNLP library was used as source of necesary tools
+Tools that where used include: Tokenizer,POS Tagger. Also SentiWordNet  was used as word sentiment glossary
+
+Flowing information regarding datasets sizes and word content where obtanied with above tools
+
+\section{ Standart Datasets }
+
+This section describes standart datasets used in the field of sentiment analisis, that can be used in subjectivity detection.
+
+\subsection{ Movie Review Data - MOVIE }
+
+This dataset was first introduced in article \cite{PangLee2002}, as data for sentiment discrimination. Later this data was also used to prove that
+subjectivity filtering can benefit sentiment discrimination in folowing article \cite{PangLee2004}. This study lead to emergance of subjectivity dataset
+ - a variant of polarity dataset with subjective / objective class assingment.
+The dataset is available for use \footnote{ \url{https://www.cs.cornell.edu/people/pabo/movie-review-data/} }. At the time of writing the only available
+download for this dataset was: \url{subjectivity_dataset_v1.0} so this is the download that was used. As it is stated in the articles and also in 
+Readme file provieded with the dataset, data was annotated automatically. This means that some percentage of testcases might be incorectly classified
+Generaly speaking classififaction between subjective and objecitvie cases was performed using the asumption that plot sumarries are mostly objective
+while user comments with corresponding ratings are mostly subjective. Brief analisys of the input data revealed that this in fact is mostly true and no
+cases where found for which it could be stated with certainnity that it was incorectly classified.
+
+When it comes to data format, this dataset is pleasingly simple. It is the most compatable with the format established for this thesis. The data is organized
+into 2 files one of which holds the subjective data, and second holds the plot summaries aka. objective data.Both files held 5000 testcases. This made the preprocessing quite simple as it only
+requiered a merge between two files. However in order to keep the dataset mixed in terms of subjective / objecitvie testcases, the two file where not joined one
+after another but rather line by line - the files where interleaved together.
+
+Some basic information regarding data was gathred. The results are presented in the table below:
+
+%\input{tbl/movie-sts}
+
+To keep things short this dataset will from now on be refered to as MOVIE dataset
+
+
+\subsection{ MPQA }
+
+This dataset was kinda hard to use
+
+\subsection{ DSRC }
+
+Interestingly,shortest ans the best dataset
+
+\url{https://www.comp.nus.edu.sg/~leews/publications/dellzhang_sigir2005.pdf}
+
+\section{ Developed Datasets }
+
+This section describes additional datasets used in provcess of method development as well as performance testing
+
+\subsection{ ALL }
+
+This is not realy a separate dataset but rather a rehash of the formerly descibed ones. 
+Particuraly this dataset was obtained as an union of the fromerly descrbed datasets as folows:
+
+\begin{displaymath}
+\centering
+ALL = MOVIE \cup MPQA \cup DSRC
+\end{displaymath}
+
+Above sets where merged in that particural order
+
+
+\subsection{ Sample }
+
+As it's name suggest this dataset was created to reresent a sample of the ALL dataset. This data set was created to speed up some steps in methods developement
+Tasks like feature elemination, especially using crossvaliation, takes a lot of time. Performing such tasks even with methods using the least features would
+take too much time. So the idea behind SAMPLE dataset is to take a representative portion of the ALL dataset, and use it to perform any kinds of test that 
+only need to find the performance relation not absolute performance. A good example is feature elemination, in it's process we find which cominations of features
+perform better and which perform worse, we don't neceserly need to know exact performance of particural set of features ( although it would be desireable ) We only
+need to know whcich ones perform better. 
+
+
+
+\subsection{ Huffington }

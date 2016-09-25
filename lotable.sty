@@ -1,0 +1,58 @@
+\newlength{\lotw}%
+\newlength{\loth}%
+\newlength{\locw}%
+\newlength{\loch}%
+\newlength{\locbt}%
+\newlength{\locbb}%
+\newlength{\locbl}%
+\newlength{\locbr}%
+\newlength{\locpt}%
+\newlength{\locpb}%
+\newlength{\locpl}%
+\newlength{\locpr}%
+\newenvironment{lotable}[2]
+{%
+\lotw=#1%
+\loth=#2%
+\locw=50pt%
+\loch=50pt%
+\locbt=0pt%
+\locbb=0pt%
+\locbr=0pt%
+\locbl=0pt%
+\locpt=0pt%
+\locpb=0pt%
+\locpr=0pt%
+\locpl=0pt%
+\def\loha{c}%
+\def\lova{c}%
+\def\locd{0}%
+\def\g{\global}
+%
+%
+\def\bg##1##2{\hbox{\colorbox[rgb]{##1}{##2}}}
+\def\pvrule##1##2{\hbox to0pt{\hspace*{\dimexpr##1/-2}\vrule width ##1 height ##2}}
+\def\phrule##1##2{\vbox to0pt{\vspace*{\dimexpr##1/-2}\hrule height ##1 width ##2}}
+\def\loframe##1{\hbox{\pvrule{\locbl}{\loch}\vbox{\phrule{\locbt}{\locw}##1\phrule{\locbb}{\locw}}\pvrule{\locbr}{\loch}}}
+\def\abox##1##2##3{%
+\vbox to##2{%
+\vspace{\locpt}%
+\if\lova c\vfil\fi\if\lova b\vfil\fi%
+\hbox to##1{%
+\hspace{\locpl}%
+\if\loha c\hfil\fi\if\loha r\hfil\fi%
+##3%
+\if\loha c\hfil\fi\if\loha l\hfil\fi%
+\hspace{\locpl}%
+}%
+\if\lova c\vfil\fi\if\lova t\vfil\fi%
+\vspace{\locpb}%
+}%
+}%
+\def\cell##1{\loframe{\abox{\locw}{\loch}{\rotatebox{\locd}{##1}}}}
+\def\ccell##1##2{\hbox{\colorbox[rgb]{##1}{\cell{##2}}}}
+\fboxsep=0pt%
+\tabskip=0pt%
+\offinterlineskip%
+\setbox0\vbox to\loth\bgroup\begin{halign}}
+{\end{halign}\egroup\hspace*{\dimexpr(\textwidth-\lotw)/2}\hbox{\box0}}

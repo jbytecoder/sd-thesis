@@ -69,8 +69,8 @@ im. Stanis\l{}awa Staszica w Krakowie}}}
 {\large \@facultyPL}}\\\vspace*{2mm}
 {\large\textsc{\@departmentPL}}\vspace*{1cm}
 
-\ifpdflatex\includegraphics[scale=0.3]{agh}
-\else\includegraphics[scale=0.7]{agh}
+\ifpdflatex\includegraphics[scale=0.3]{img/agh}
+\else\includegraphics[scale=0.7]{img/agh}
 \fi
 \vspace*{1cm}
 
@@ -117,8 +117,8 @@ University of Science and Technology in Krakow}}}
 {\large \@facultyEN}}\\\vspace*{2mm}
 {\large\textsc{\@departmentEN}}\vspace*{1cm}
 
-\ifpdflatex\includegraphics[scale=0.3]{agh}
-\else\includegraphics[scale=0.7]{agh}
+\ifpdflatex\includegraphics[scale=0.3]{img/agh}
+\else\includegraphics[scale=0.7]{img/agh}
 \fi
 \vspace*{1cm}
 

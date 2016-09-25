@@ -1,0 +1,111 @@
+\chapter{Method Engineering}
+
+This chapter describes steps taken to ensure maximal performance of methods in final tests
+
+\section{ Test Envinorment }
+
+To fullfill goals of this thesis, an apropirate testing envinorment is requiered. As it was stated in erlier chapter studied methods are implemented
+as a standalone program. This program is capable of transforming source file containing annotated testcases into teaching vectors file. For the purposes of 
+performing the actual classififaction, an ready to use software was used that will be explained:
+
+KNIME Analytics Platform - Leading open-source solution for data mining purpouses.  KNIME was the main tool used in testing processes. 
+Many features of this tool proved usefull like, wide range of available classifiers, and supported file formats. The most importan feature was the 
+ability to create automated dataflows ( this is the basic idea of working with knime ). Wich enabled quite significant standarization of many aspects of
+testing.
+
+WEKA - Is a library providing extensive set of classifiers ready to be used. THis library was used through KNIME's plugin system so it enchanced it's
+bultin set of available classifiaction algorithms. This allowed a greater variety of classification methods and algorithms to be put into tests
+\subsection{ Classififer evaluation }
+
+Classifier performance was assesd using common tools in the field of machine learning.  The most basic measure of classifier performance, especially in case
+of binary classififaction, is it's confusion matrx ( or a contingency table ). This consists of folowing cells:
+TP - True Positive - It represents the ammount of instances for which dataset indicated it belonged to first class, and classifier reproted the same class
+FN - True Negative - It represents the ammount of instances for which dataset indicated it belonged to first class, and classifier reported it beloned to second class
+FP - False Positive - It represents the ammount of instances for which dataset indicated it belonged to second class, and classifier reported it beloned to first class
+TN - True Negative - It represents the ammount of instances for which dataset indicated it belonged to second class, and classifier reproted the same class
+
+By using information form this table statistical measures may be derived. The most commonly used are derived as follows
+Accuracy - ACC - (TP+TN) / ( TP+FN+FP+TN )
+Sensitivity - TPR - TP / (TP+FN)
+Precision - ( PPV - {\b P}ositive {\b P}redictive {\b V}alue ) -  TP / (TP+FP)
+F1 Score - F1 - 2TP / (2TP + FN + FP)
+
+This statistics will be preseneted in the folowing tables containg performance results for each discussed test.  
+Another consideration is the split between training and testing data. Typically the data avaliable for testing is limited, and using this data we
+want to konw how well a classififer will perform on new unknown data. To achive this we neeed to split the data into two sets. {\b Training} set will be 
+the part of dataset that was used to train the classifier ( ie. this will be the data that it schould recognize ). {\b Testing } set will be the
+part of dataset that will be used to chech how well classififer performs on new data. Few approaches exists in this area:
+
+Holdout method - In this method data set is simply divied into two with some preset ratio ( usually it's 70 / 30 ). For better relability stratification
+	         might be used, to ensure similar class distribution in both training and testing sets.  Result confidence of this method is dependtant
+		 on whether the traning / testing sets are representative or not.  Practivaly this means that this method isn't realy relaible.
+		  
+Corssvaliation  - this method requires dviding dataset into k ( k is a parameter ) disjoint sets randomly using startificatoin to ensure class
+		  distribution. Then classifier is evaluated k times, each time leaving one part out for testing purpouses.  
+		  The resultng accuracy ( error rate ) is an average of this tests. Typical setting for k used in research is 10
+
+
+
+
+
+\subsection{ Classification Workflow }
+
+Evaluation of studied methods performance in comparions to each other, requiered a tesing scheme that would be repeatable and therefor comparable. 
+This is why a special KNIME workflow was designed to aid in the testing process. 
+
+\section{Text Preprocessing}	
+
+Parameters used in tokenizers tests are summarized in next table
+
+\input{tbl/dev-st-testcases.tex}
+
+Only one parameter was twekad for this particural test namley, crossvalidation was set to 2
+to speedup tests evaluation
+\pagebreak
+\section{Tokenization}
+
+Performance comparision grouped by methods is contained in next table
+
+\input{tbl/dev-tok-mth-summary}
+\pagebreak
+Performance comparision grouped by classifiers is contained in next table
+
+\input{tbl/dev-tok-cls-summary}
+
+Presented results allow to conclude unambigiously that openNLP tokenizer offers superior results for tested methods 
+\pagebreak
+\section{Stop Words}
+
+Folowing table sumarizes words that where threated as stop words in folowing tests
+
+\input{tbl/dev-st-words}
+
+Performance comparision grouped by methods is contained in next table
+
+\input{tbl/dev-st-mth-summary}
+
+Performance comparision grouped by classifiers is contained in next table
+
+\input{tbl/dev-st-cls-summary}
+
+Result in this section support hipotheis claming that stop words removal might have negative impact on methods performance
+\pagebreak
+\section{Feature Engineering}
+
+All of the analyzed methods propose significant ammount of features for their functioning. High data dimensionality is known to 
+impact classififaction results negativley. When there are many features it is more likley that some will yield misleading,inconsisten or even contradictory
+information. This decreases classifier performance. For this reason we need to remove those featrues that do confuse our classifier. 
+
+ 
+
+Folowing table decribes result of bacwards feature elemination process performed using Bayes Net classifier
+\input{tbl/dev-fe-iter-bn}
+feature elemination offers no improvement in classification performance, for this particural classifier
+\input{tbl/dev-fe-iter-dt}
+\input{tbl/dev-fe-iter-lbn}
+\input{tbl/dev-fe-iter-lr}
+\input{tbl/dev-fe-iter-mlp}
+\input{tbl/dev-fe-iter-rf}
+\input{tbl/dev-fe-iter-all}
+\pagebreak
+\section{Parameter Engineering}
