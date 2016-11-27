@@ -1,4 +1,153 @@
 \chapter{Related Work}
 
-The most signification information source for this thesis was \cite{remus2015}, although firstly \cite{remus2011} was used.
-The rest of referenced articlles like \cite{kamal2013}, sourced only their respective methods for this thesis.
+This chapter sets thesis goal in appropriate context regarding work done in sentiment analysis. Provided introduction into subjectivity detection from 
+researchers point of view.
+
+\section{ Subjectivity in Sentiment Analysis }
+
+When it comes to work done in the field of sentiment analysis, a comprehensive survey has already been done by Pang and Lee in \cite{PangLee2008}. This
+document may well serve as a foundation for many researches especially in area of document-level polarity classification. The survey not only enumerates
+and organizes required terminology, but also highlights already taken paths with their results and encountered difficulties. 
+One such difficulty, that has turned into a sentiment analysis domain on it's own, is subjectivity discrimination. 
+
+Although subjectivity identification is a more general task than polarity identification, researchers have stumbled upon it only during the latter.
+When performing polarity classification one is tempted, to assume input reviews and text would be opinion bearing, obviously this is not always the case.
+Subjectivity caring expressions and sentences are mixed with facts and citations in a typical review. The possibility of automatic summarization of a review, up to point
+where produced extract would contain only subjective sentences, has been exploited in \cite{PangLee2004}. 
+
+The results presented in \cite{PangLee2004}, are quite promising. The most important report is that they where able to improve polarity classification 
+task accuracy by around 4\%, by filtering out data that might confuse the classifier. Other important implication is that even if accuracy won't grow 
+it stays unchanged while amount of interpreted data drops by around 40\%. This is an important performance improvement opportunity,provided that we can 
+quickly and acculturate detect subjective sentences. The reported accuracy for sole task of subjectivity discrimination is  quite high ( around 92\% ),
+however it was obtained on relatively small and domain consistent dataset. 
+
+As we might find out in chapter 3 of \cite{PangLee2008}, polarity detection is quite domain dependent, therefore if subjectivity detection will behave the same
+way it might be hard to maintain such high accuracy. There is one more aspect that needs explanation. The presented results provide the first step in
+creation of polarity detection system - it proves that it can be one with reasonable accuracy.  Practicality dictates that such system must not only
+be accurate but work in a reasonably small amount of time. The problem with presented approach - particularly for subjectivity detection is the amount
+of used features. There need to be as many features as there are unique words in any review that the system would work for. This is a problem for most
+machine learning algorithms, particularly when we want to use a large dataset.
+
+The mentioned above problems are good reasons to put some more work in subjectivity detection, particularly:
+\begin{itemize}
+\item More test are required to ensure that such high accuracy is possible across different datasets and domains
+\item The possibility to decrease method complexity should be studied 
+\item There might exist other better suited, and less complex methods to exploit in subjectivity detection
+\end{itemize} 
+
+\section{Approaches}
+
+Most of approaches for subjectivity detection suggested by researchers, aim to utilize machine learning in order to detect subjectivity. While
+choosing suitable classification algorithm is important and may significantly impact performance, no known binary classification algorithms works on
+raw text. For this reason a conversion method is necessary that will extract some characteristics of sentences. If appropriate conversion is developed
+then it should be possible to classify sentences based on whether they are subjective or objective using well known machine learning techniques. For the 
+purposes of this thesis such a conversion algorithm will from now on be called a "subjectivity detection method" SDM. for short.
+
+A good SDM must create feature vectors that will expose clues of subjectivity. Researchers have postulated many different sources of such clues using
+statistical and NLP related tools for their extraction.  In order to analyze what paths have been visited and what might be omitted, some
+categorization is needed. The remainder of this section is an attempt in categorizing SDM's depending on how sophisticated NLP tools must be used.
+
+
+\subsection{ Word N-Grams }
+
+The term "n-gram" comes from linguistic, and is defined as: contigious sequence of n items from a given sequence of text. In sentiment analysis n-grams
+are most populary applied to words. Therefore for example a word trigram is a sequence o 3 words found one after another in text corpus. Such word
+sequences have been previously used in other text categorization tasks with success.  
+
+Since we are looking for subjectivity clues that could be used as values for feature vectors, n-grams presence could be used as such. The idea is to 
+search through a large corpus of text looking for all possible n-grams up to certain length, and use thoose as binary features. Not only is it quite
+obvious and easy approach, it is the most widley used by researchers and it offers decent accuracy. 
+
+For example it has been tested by Pang and Lee in \cite{PangLee2002}. As they report in Figure 3, the accuracy obtained by unigrams 
+alone is above 80\%. These are promising and suprising results if we keep in mind that simple word presence was used. The results 
+where obtained using dataset containing 10000 test cases. Subjectivity labels where automatically assinged using simple heuristic
+Author admits that labels assingment is prone to mistakes, but is still mostly reliable. Puzzeling results where obtained when 
+comparing the way n-gram presence is presented to classifier. As Pang and Lee explain in their paper the results marked as presence are 
+obtained using binary features ( for example with 1 meaning word is present in the sentence and false otherwise), while there are also 
+results using unigrams frequnecy ( each word is annotated with number of occurances ). Frequnecy based featrues carry more information.
+Not only they allow to detect word presence but also other infomration like: unique words, common words, which could serve as subjectivity clues.
+Classifier should perform better when it is presented with more informative feature vector,however that is not what Pang and Lee results imply. 
+The diffrence between presence and frequnecy is high ( espeially for SVM ) and seems classififer dependand. It would appear that other
+infomration carried by frequency featrues confuse classififer ( especially SVM ). Perhaps other classifier would benifit from frequnecy 
+based features. There is also the possibility that this observation is specific to tested dataset. Another interesting result is the significantly 
+lower performance of bigrams. While one might think that using bigrams allows catching more information like word cooocurence, the results leave 
+no doubt all classifiers performed worse by around 3\%. The uniformity of impact over all tested classifiers suggests that there is 
+something deeper about this observation, than presence vs frequency. However same care must be taken to ensure that this obseration is not a 
+result of dataset sepcifity. The results for "Top unigrams" are also promising because it means we can significantly reduce the feature
+space with little to none losse of accuracy. This in turn would be help create reliable subjectivity detection system working with resonable speed.
+
+Another test of n-gram approach has been performed by Yu in \cite{Yu2003}. The dataset in use was much smaller ( 400 sentences for dataset Standart A ),
+but it was annotated by humans, this improves tests relability. The results are sumarized in table 4 at page 7. Here the results are presented
+for each class using recall and precsion. This allows more detailed analisys. Firstly Yu results show us that ngram features perform best in opinion
+recognision ( Up to 0.88 F1 ) while fail in facts detection. ( Up to 0.48 F1 ).  We may also notice how higher order ngrams impact results. Results on 
+Standart A for uni and bigrams show that bigrams could be a little help, they tend to improve fact recognizsion of facts while opinion
+ parameters are maintained. However this observation dose not hold on second dataset where both classes are negativley and significantly impacted
+This confirms that bigram impact is dataset dependant and ( probably ) dataset size dependant. Such an observation needs further investigation.
+Suprisingli adding Trigrams to feature set, gives results even better than unigrams alone. Only second dataset presented some negative impact on fact 
+class but this is complemented by improvement over opinion class. This suggests that it is worth to further investigate higher oreder ngrams and theri
+impact on subjectvtiy detection. It is possible that using only tri and quadrigrams even better results could be achived
+
+It is worth noticing that mentioned usages of ngram based subjectvitiy detection has only been applied to relatively small datasets ( 10000 at most )
+which in turn results in limited ammount of words used, which translates to limited feature space.  Feature space size impacts classification algoritms
+time performance greatley in some cases making it unusable. This is the problem with n-gram bases featrues, their numbers grow rapidly with training sets
+size, especially when using higher order ngrams.  Pang and Lee \cite{PangLee2002} have given us example of how this problem could be resolved.
+we have seen that limiting the ammount of words becaming features, did not impact accuracy. It may be that ,if we choose a siutable ( and relatively small )
+word set, accuracy not only dose not drop but even gets better.
+
+\subsection{ N-Gram Collocation }
+
+This method is proposed by Wiebe \cite{Wiebe2001}. The proposition is to improve the higher order ngram apporach in two ways: choosing only n-grams
+likley to be subjective based on dataset, and generalizing the uniqe words
+
+Result presented for diffrent datasets show performence improvement mainlny for ugen-ngrams. This approach allows to decrease feature space, and also
+promisie to be less dataset dependant. That means it could perform  beter in cross-corpus tests
+
+\subsection{ Varraiying Instantiation Trigrams }
+
+This method is proposed in \cite{Muray2011}. This is another expansion of n-gram approach. This time only trigrams are considered. The proposed development 
+of this method is to include some abstraction by including trigrams with words replecaed by theris pos tag. Therefore this abstarct trigrams 
+match more data and could reveal more patterns
+
+Character Ngrams
+
+The name of this category has been inspired by title of \cite{kraaij2008}. This category encompasses subjectivity clues gathered with little to none usage
+of advanced NLP tools. There are two SDM's in this category. 
+
+The first one has been reported in \cite{kraaij2008}. It's comes down to counting frequencies of character n-grams. Test are performed for two variances of this method
+First variance uses sentence segmentation to process each word while the other works on whole sentence. The presented result show that second variance is 
+significantly better with obtained accuracy around 80\%. This method is interesting due to simplicity and medium sized feature space, although it still might
+prove impractical ( if high order ngrams are necessary ).
+
+\section{ Readability Approach }
+
+This innovative approach has been first proposed by Remus \cite{remus2011}. Most researchers focus on syntactical
+aspects of natural language that might diffrenciate subjectvie and objective sentences. They assume that subjectivity of a sentence is directly 
+deriveable that way. Remus took a diffrent apporach to subjectivity detection problem. He proposed to take a step back and look at the problem
+more abstractly. The proposition is to utilize antoher feature of natural language: readability. This way we could change the problem at hand
+from subjectvity detection to readability detection which would ( presumably ) be easier to solve.
+
+Readability is defined by profesor Mclaughlin as "the degree to which a given class of people find certain reading matter compelling and,
+necessarily, comprehensible" \cite{Mclaughlin1969}. In his paper profesor introduces new readability formula, one of which was used by Remus 
+in his work. In order to utilize readablity, Remus had to connect it somehow with subjetivity. In his paper \cite{remus2011} he hypotheized that
+there exists a direct connection between readability and subjectivity. That is to say: the more a text was readable the more likley it was to
+be subjetive. 
+
+The results yield by this approach are quite promising. Using only 5 easy computable features he ahived a result of around 85\% 
+which would defeat the classical  ngram apporach by 5\% margin. However a deeper analysis of readabilty done in \cite{remus2015} showed
+that such high results are dataset and domain dependant. The results reported for "hardest" dataset ( Section 6.3 table 25 ) 
+did not go over 60\% with pure readability approach. 
+
+
+\section{ Word Feature Approach }
+
+\subsection{ Subjectivity }
+
+\subsection{ Parts of speach }
+
+\subsection{ Gradeabiity }
+
+ This area of  subjectivity clues has been introduced by Remus in \cite{remus2005} 
+
+
+
+
