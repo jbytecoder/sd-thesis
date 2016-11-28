@@ -84,4 +84,18 @@ sentence
 	
     
       
+"Sentence Subjectivity Detection with Weakly-Supervised Learning"
+http://www.aclweb.org/anthology/I11-1129
+datasets: MPQA
+keywords: subjectivity detection, 
+
+"Subjectivity detection and Semantic orientation
+based Methods for Sentiment Analysis"
+http://www.ijser.org/researchpaper%5CSubjectivity-detection-and-Semantic-orientation-based-Methods-for-Sentiment-Analysis.pdf 
+dataset: MOVIE
+keyword: SentiWordNet, subjectivity score
+
+Subjectivity Detection using Genetic Algorithm
+dataset: MPQA
+keywords: GA
   

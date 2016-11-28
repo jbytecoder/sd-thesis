@@ -1,35 +1,6 @@
 \documentclass[pdflatex,en,11pt]{aghdpl}
 
-\usepackage[polish,english]{babel}
-\usepackage[utf8]{inputenc}
-
-% dodatkowe pakiety
-\usepackage{enumerate}
-\usepackage{float}
-\usepackage{listings}
-\usepackage{lotable}
-\lstloadlanguages{TeX}
-
-\lstset{
-  literate={ą}{{\k{a}}}1
-           {ć}{{\'c}}1
-           {ę}{{\k{e}}}1
-           {ó}{{\'o}}1
-           {ń}{{\'n}}1
-           {ł}{{\l{}}}1
-           {ś}{{\'s}}1
-           {ź}{{\'z}}1
-           {ż}{{\.z}}1
-           {Ą}{{\k{A}}}1
-           {Ć}{{\'C}}1
-           {Ę}{{\k{E}}}1
-           {Ó}{{\'O}}1
-           {Ń}{{\'N}}1
-           {Ł}{{\L{}}}1
-           {Ś}{{\'S}}1
-           {Ź}{{\'Z}}1
-           {Ż}{{\.Z}}1
-}
+\usepackage{common}
 
 %---------------------------------------------------------------------------
 
@@ -39,8 +10,8 @@
 \titlePL{ Porównanie metod odróżniania opini od factów }
 \titleEN{ Subjectivity detection method comparision }
 
-\shorttitlePL{Przygotowanie pracy dyplomowej w~systemie \LaTeX} % skrócona wersja tytułu jeśli jest bardzo długi
-\shorttitleEN{Thesis in \LaTeX}
+\shorttitlePL{ Porównanie metod odróżniania opini od factów } % skrócona wersja tytułu jeśli jest bardzo długi
+\shorttitleEN{  Subjectivity detection method comparision }
 
 \thesistypePL{Praca magisterska}
 \thesistypeEN{Master of Science Thesis}
@@ -58,8 +29,6 @@
 
 \acknowledgements{ Many thanks to \dots }
 
-
-
 \setlength{\cftsecnumwidth}{10mm}
 
 %---------------------------------------------------------------------------
@@ -69,16 +38,18 @@
 \titlepages
 
 \tableofcontents
+\newpage
+\printacronyms[include-classes=abbrev,name=Abbreviations]
 \clearpage
 
 \include{S1/S1}
 \include{S2/S2}
-\include{S3/S3}
-\include{S4/S4}
-\include{S5/S5}
-\include{S6/S6}
-\include{S7/S7}
-\include{S8/S8} 
+%\include{S3/S3}
+%\include{S4/S4}
+%\include{S5/S5}
+%\include{S6/S6}
+%\include{S7/S7}
+%\include{S8/S8} 
 
 \listoftables
 % itd.
@@ -86,7 +57,6 @@
 % \include{dodatekA}
 % \include{dodatekB}
 % itd.
-
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
