@@ -95,7 +95,7 @@ http://www.ijser.org/researchpaper%5CSubjectivity-detection-and-Semantic-orienta
 dataset: MOVIE
 keyword: SentiWordNet, subjectivity score
 
-Subjectivity Detection using Genetic Algorithm
+ Subjectivity Detection using Genetic Algorithm
 dataset: MPQA
 keywords: GA
   
