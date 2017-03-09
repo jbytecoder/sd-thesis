@@ -1,0 +1,44 @@
+apply plugin: 'java'
+
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.codehaus.groovy:groovy-all:2.4.7'
+    }
+}
+
+
+
+task a {
+    doLast {
+        print 'run.a'
+    }
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+    testCompile 'junit:junit:4.12'
+    testCompile 'javax.json:javax.json-api:1.0'
+    //testCompile group: 'javax.json', name: 'javax.json-api', version '1.0'
+}
+
+task copyTestResources(type: Copy) {
+    from "${projectDir}/src/test/resources"
+    into "${buildDir}/classes/test"
+}
+processTestResources.dependsOn copyTestResources
+
+gradle.taskGraph.whenReady {
+    g -> print 'WHEN READY'
+    print g
+}
