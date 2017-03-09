@@ -1,0 +1,27 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+
+# Latexmk output 
+*.dvi
+*.pdf
+
+# Latexmk
+*.fdb_latexmk
+*.fls
+*.lot
+
+# LaTeX Beamer
+*.snm
+*.vrb
+*.nav
+*.out
+
+# BibTeX
+*.bbl
+*.blg
+/.nb-gradle/
+/.gradle/
+/tools/data/mpqaLib/.nb-gradle/
+/tools/data/mpqaLib/build/
