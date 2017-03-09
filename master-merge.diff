@@ -1,0 +1,314 @@
+diff --git a/S2/S2.tex b/S2/S2.tex
+index f69e580..493d393 100644
+--- a/S2/S2.tex
++++ b/S2/S2.tex
+@@ -104,7 +104,7 @@ promisie to be less dataset dependant. That means it could perform  beter in cro
+ 
+ \subsection{ Varraiying Instantiation Trigrams }
+ 
+-This method is proposed in \cite{Muray2011}. This is another expansion of n-gram approach. This time only trigrams are considered. The proposed development 
++This method is proposed in \cite{Murray2011}. This is another expansion of n-gram approach. This time only trigrams are considered. The proposed development 
+ of this method is to include some abstraction by including trigrams with words replecaed by theris pos tag. Therefore this abstarct trigrams 
+ match more data and could reveal more patterns
+ 
+@@ -146,7 +146,7 @@ did not go over 60\% with pure readability approach.
+ 
+ \subsection{ Gradeabiity }
+ 
+- This area of  subjectivity clues has been introduced by Remus in \cite{remus2005} 
++ This area of  subjectivity clues has been introduced by Remus in \cite{remus2011} 
+ 
+ 
+ 
+diff --git a/S4/S4.tex b/S4/S4.tex
+index d5b53f3..8ba8390 100644
+--- a/S4/S4.tex
++++ b/S4/S4.tex
+@@ -43,13 +43,13 @@ with good reported accuracy. Also some statistics about testcases are gathered d
+ \item \textbf{wl} - Representes average word length in characters 
+ \item \textbf{nosw} - Representes number of words with exactly one syllabe
+ \item \textbf{npsw} - Representes number of words with more then one syllable
+-\item \textbf{ntop} - Representes number of word from testcase which are not amongs 1000 most frequnet. details \cite{ 2.1.7 }{remus2011}
++\item \textbf{ntop} - Representes number of word from testcase which are not amongs 1000 most frequnet. details \cite{remus2011}
+ \item \textbf{c} - Representes number of characters in the testcase, without spaces
+ \item \textbf{cw} - Representes number of complex words, ie. number of words with more than 4 syllabes
+ \item \textbf{tsc} - Representes total number of syllabes in all words of testcase
+ \end{itemize}
+ 
+-Then based on this information folowing features are calculated. We present only forumals for this features, and in bracket their names as used in source article. The article  \cite{ subsection 2.1 }{remus2011} offers more precise desciption of this features.
++Then based on this information folowing features are calculated. We present only forumals for this features, and in bracket their names as used in source article. The article {remus2011} offers more precise desciption of this features.
+ 
+ 
+ \section{M3 - Bag of words}
+diff --git a/S5/S5.tex b/S5/S5.tex
+index 7b81930..c92800f 100644
+--- a/S5/S5.tex
++++ b/S5/S5.tex
+@@ -57,7 +57,7 @@ This is why a special KNIME workflow was designed to aid in the testing process.
+ 
+ Parameters used in tokenizers tests are summarized in next table
+ 
+-\input{tbl/dev-st-testcases.tex}
++%\input{tbl/dev-st-testcases.tex}
+ 
+ Only one parameter was twekad for this particural test namley, crossvalidation was set to 2
+ to speedup tests evaluation
+@@ -66,7 +66,7 @@ to speedup tests evaluation
+ 
+ Performance comparision grouped by methods is contained in next table
+ 
+-\input{tbl/dev-tok-mth-summary}
++%\input{tbl/dev-tok-mth-summary}
+ \pagebreak
+ Performance comparision grouped by classifiers is contained in next table
+ 
+@@ -78,15 +78,15 @@ Presented results allow to conclude unambigiously that openNLP tokenizer offers
+ 
+ Folowing table sumarizes words that where threated as stop words in folowing tests
+ 
+-\input{tbl/dev-st-words}
++%\input{tbl/dev-st-words}
+ 
+ Performance comparision grouped by methods is contained in next table
+ 
+-\input{tbl/dev-st-mth-summary}
++%\input{tbl/dev-st-mth-summary}
+ 
+ Performance comparision grouped by classifiers is contained in next table
+ 
+-\input{tbl/dev-st-cls-summary}
++%\input{tbl/dev-st-cls-summary}
+ 
+ Result in this section support hipotheis claming that stop words removal might have negative impact on methods performance
+ \pagebreak
+@@ -99,13 +99,13 @@ information. This decreases classifier performance. For this reason we need to r
+  
+ 
+ Folowing table decribes result of bacwards feature elemination process performed using Bayes Net classifier
+-\input{tbl/dev-fe-iter-bn}
++%\input{tbl/dev-fe-iter-bn}
+ feature elemination offers no improvement in classification performance, for this particural classifier
+-\input{tbl/dev-fe-iter-dt}
+-\input{tbl/dev-fe-iter-lbn}
+-\input{tbl/dev-fe-iter-lr}
+-\input{tbl/dev-fe-iter-mlp}
+-\input{tbl/dev-fe-iter-rf}
+-\input{tbl/dev-fe-iter-all}
+-\pagebreak
++%\input{tbl/dev-fe-iter-dt}
++%\input{tbl/dev-fe-iter-lbn}
++%\input{tbl/dev-fe-iter-lr}
++%\input{tbl/dev-fe-iter-mlp}
++%\input{tbl/dev-fe-iter-rf}
++%\input{tbl/dev-fe-iter-all}
++%\pagebreak
+ \section{Parameter Engineering}
+\ No newline at end of file
+diff --git a/S6/S6.tex b/S6/S6.tex
+index 3fb6e63..beaa8e3 100644
+--- a/S6/S6.tex
++++ b/S6/S6.tex
+@@ -5,7 +5,7 @@
+ \section{ Standart datasets performance}
+ Presentation of test results
+ 
+-\input{tbl/res-zeus-summary.tex}
++%\input{tbl/res-zeus-summary.tex}
+ 
+ \section{ Cross classififcation performance}
+ 
+diff --git a/bibliography.bib b/bibliography.bib
+index d2fa1d5..29fbdff 100644
+--- a/bibliography.bib
++++ b/bibliography.bib
+@@ -5,7 +5,7 @@
+   booktitle   = {Mining Text Data},
+   publisher   = {Springer},
+   year        = {2012},
+-  pages		  = {163-222}
++  pages	      = {163-222}
+ }
+ @article{PangLee2008,
+   title={Opinion mining and sentiment analysis},
+@@ -23,7 +23,7 @@
+    title = {A Sentimental Education: Sentiment Analysis Using Subjectivity},
+    year = {2004},
+    pages = {271--278},
+-   booktitle = {Proceedings of ACL}
++   booktitle = {Proceedings of ACL},
+    note	     = {\url{http://www.aclweb.org/anthology/P04-1035}}
+ }
+ @inproceedings{PangLee2002,
+@@ -112,7 +112,7 @@
+   booktitle   = {Proceedings of the 2010 Conference on Empirical Methods in Natural Language Processing},
+   pages       = {1046--1056},
+   year        = {2010},
+-  organization= {Association for Computational Linguistics}
++  organization= {Association for Computational Linguistics},
+   note        = {\url{http://www.cs.cornell.edu/~ainur/pubs/svmsle_emnlp2010.pdf}}	
+ }
+ @INPROCEEDINGS{Wiebe2001,
+diff --git a/lecture.txt b/lecture.txt
+index 475eda9..4e3f77b 100644
+--- a/lecture.txt
++++ b/lecture.txt
+@@ -84,4 +84,18 @@ sentence
+ 	
+     
+       
++"Sentence Subjectivity Detection with Weakly-Supervised Learning"
++http://www.aclweb.org/anthology/I11-1129
++datasets: MPQA
++keywords: subjectivity detection, 
++
++"Subjectivity detection and Semantic orientation
++based Methods for Sentiment Analysis"
++http://www.ijser.org/researchpaper%5CSubjectivity-detection-and-Semantic-orientation-based-Methods-for-Sentiment-Analysis.pdf 
++dataset: MOVIE
++keyword: SentiWordNet, subjectivity score
++
++Subjectivity Detection using Genetic Algorithm
++dataset: MPQA
++keywords: GA
+   
+\ No newline at end of file
+diff --git a/previewS1.tex b/previewS1.tex
+deleted file mode 100644
+index 1b8d288..0000000
+--- a/previewS1.tex
++++ /dev/null
+@@ -1,16 +0,0 @@
+-\documentclass[pdflatex,en,11pt]{aghdpl}
+-
+-\usepackage{common}
+-
+-\shorttitlePL{ D }
+-\shorttitleEN{ D }
+-\shortauthor{D. Hudziak}
+-
+-\begin{document}
+-
+-\include{S1/S1}
+-
+-\bibliographystyle{plain}
+-\bibliography{bibliography}
+-
+-\end{document}
+\ No newline at end of file
+diff --git a/tex/previewS1.tex b/tex/previewS1.tex
+new file mode 100644
+index 0000000..1b8d288
+--- /dev/null
++++ b/tex/previewS1.tex
+@@ -0,0 +1,16 @@
++\documentclass[pdflatex,en,11pt]{aghdpl}
++
++\usepackage{common}
++
++\shorttitlePL{ D }
++\shorttitleEN{ D }
++\shortauthor{D. Hudziak}
++
++\begin{document}
++
++\include{S1/S1}
++
++\bibliographystyle{plain}
++\bibliography{bibliography}
++
++\end{document}
+\ No newline at end of file
+diff --git a/thesis.tex b/thesis.tex
+index e966a59..db8e8ff 100644
+--- a/thesis.tex
++++ b/thesis.tex
+@@ -1,35 +1,6 @@
+ \documentclass[pdflatex,en,11pt]{aghdpl}
+ 
+-\usepackage[polish,english]{babel}
+-\usepackage[utf8]{inputenc}
+-
+-% dodatkowe pakiety
+-\usepackage{enumerate}
+-\usepackage{float}
+-\usepackage{listings}
+-\usepackage{lotable}
+-\lstloadlanguages{TeX}
+-
+-\lstset{
+-  literate={ą}{{\k{a}}}1
+-           {ć}{{\'c}}1
+-           {ę}{{\k{e}}}1
+-           {ó}{{\'o}}1
+-           {ń}{{\'n}}1
+-           {ł}{{\l{}}}1
+-           {ś}{{\'s}}1
+-           {ź}{{\'z}}1
+-           {ż}{{\.z}}1
+-           {Ą}{{\k{A}}}1
+-           {Ć}{{\'C}}1
+-           {Ę}{{\k{E}}}1
+-           {Ó}{{\'O}}1
+-           {Ń}{{\'N}}1
+-           {Ł}{{\L{}}}1
+-           {Ś}{{\'S}}1
+-           {Ź}{{\'Z}}1
+-           {Ż}{{\.Z}}1
+-}
++\usepackage{common}
+ 
+ %---------------------------------------------------------------------------
+ 
+@@ -39,8 +10,8 @@
+ \titlePL{ Porównanie metod odróżniania opini od factów }
+ \titleEN{ Subjectivity detection method comparision }
+ 
+-\shorttitlePL{Przygotowanie pracy dyplomowej w~systemie \LaTeX} % skrócona wersja tytułu jeśli jest bardzo długi
+-\shorttitleEN{Thesis in \LaTeX}
++\shorttitlePL{ Porównanie metod odróżniania opini od factów } % skrócona wersja tytułu jeśli jest bardzo długi
++\shorttitleEN{  Subjectivity detection method comparision }
+ 
+ \thesistypePL{Praca magisterska}
+ \thesistypeEN{Master of Science Thesis}
+@@ -58,8 +29,6 @@
+ 
+ \acknowledgements{ Many thanks to \dots }
+ 
+-
+-
+ \setlength{\cftsecnumwidth}{10mm}
+ 
+ %---------------------------------------------------------------------------
+@@ -69,16 +38,18 @@
+ \titlepages
+ 
+ \tableofcontents
++\newpage
++\printacronyms[include-classes=abbrev,name=Abbreviations]
+ \clearpage
+ 
+ \include{S1/S1}
+ \include{S2/S2}
+-\include{S3/S3}
+-\include{S4/S4}
+-\include{S5/S5}
+-\include{S6/S6}
+-\include{S7/S7}
+-\include{S8/S8} 
++%\include{S3/S3}
++%\include{S4/S4}
++%\include{S5/S5}
++%\include{S6/S6}
++%\include{S7/S7}
++%\include{S8/S8} 
+ 
+ \listoftables
+ % itd.
+@@ -87,7 +58,6 @@
+ % \include{dodatekB}
+ % itd.
+ 
+-
+ \bibliographystyle{plain}
+ \bibliography{bibliography}
+ 

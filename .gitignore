@@ -21,7 +21,9 @@
 # BibTeX
 *.bbl
 *.blg
+
 /.nb-gradle/
 /.gradle/
 /tools/data/mpqaLib/.nb-gradle/
+/tools/data/mpqaLib/.gradle/
 /tools/data/mpqaLib/build/
